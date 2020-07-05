@@ -10,6 +10,8 @@
 int windowWidth = 800;
 int windowHeight = 600;
 
+bool keys[256];
+
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -29,8 +31,12 @@ void display()
         0
     );
     static float angle;
+    if (keys['d'])
+        angle += 1;
+    if (keys['a'])
+        angle -= 1;
     glRotatef(
-        angle++, //angle
+        angle, //angle
         0, 0, 1 // axis, z
     );
     glScalef(256, 256, 1);
@@ -51,6 +57,19 @@ void reshape(int width, int height)
     windowWidth = width;
     windowHeight = height;
 }
+void keyboard(unsigned char key, int x, int y)
+{
+    if (key == 0x1b)
+        exit(0);
+    printf("keyboard: '%c' (%#x)\n", key, key);
+    keys[key] = true;
+}
+void keyboardup(unsigned char key, int x, int y)
+{
+    printf("keyboard up: '%c' (%#x)\n", key, key);
+    keys[key] = false;
+}
+
 int main(int argc, char* argv[])
 {
     glutInit(&argc, argv);
@@ -61,5 +80,8 @@ int main(int argc, char* argv[])
     glutDisplayFunc(display);
     glutTimerFunc(0, timer, 0);
     glutReshapeFunc(reshape);
+    glutKeyboardFunc(keyboard);
+    glutKeyboardUpFunc(keyboardup);
+    glutIgnoreKeyRepeat(GL_TRUE);
     glutMainLoop();
 }
