@@ -4,6 +4,7 @@
 #include <iostream>
 #include "../glm/glm/glm.hpp"
 #include <GL/glut.h>
+#include "font.h"
 
 #define APP_TITLE "OpenGLDojo"
 
@@ -42,6 +43,14 @@ void display()
     glScalef(256, 256, 1);
     glutWireTeapot(1);
     // glFlush();
+
+    fontBegin();
+    fontSetColor(0, 0xff, 0xee);
+    fontSetPosition(0, windowSize.y - fontGetSize()*1.5);
+    fontSetSize(FONT_DEFAULT_SIZE / 2);
+    fontDraw("angle:%f", angle);
+    fontEnd();
+
     glutSwapBuffers();
 }
 void timer(int v)
@@ -54,18 +63,18 @@ void reshape(int width, int height)
 {
     printf("reshape: width:%d height:%d\n", width, height);
     glViewport(0, 0, width, height);
-    windowSize = { width,height };
+    windowSize = ivec2{ width,height };
 }
 void keyboard(unsigned char key, int x, int y)
 {
     if (key == 0x1b)
         exit(0);
-    printf("keyboard: '%c' (%#x)\n", key, key);
+    // printf("keyboard: '%c' (%#x)\n", key, key);
     keys[key] = true;
 }
 void keyboardup(unsigned char key, int x, int y)
 {
-    printf("keyboard up: '%c' (%#x)\n", key, key);
+    // printf("keyboard up: '%c' (%#x)\n", key, key);
     keys[key] = false;
 }
 
