@@ -2,13 +2,13 @@
 //
 
 #include <iostream>
-
+#include "../glm/glm/glm.hpp"
 #include <GL/glut.h>
 
 #define APP_TITLE "OpenGLDojo"
 
-int windowWidth = 800;
-int windowHeight = 600;
+using namespace glm;
+ivec2 windowSize = { 800,600 };
 
 bool keys[256];
 
@@ -19,15 +19,15 @@ void display()
     // initialize matrix
     glLoadIdentity();
     gluOrtho2D(
-        0, windowWidth,
-        windowHeight, 0);
+        0, windowSize.x,
+        windowSize.y, 0);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
     glTranslatef(
-        windowWidth / 2,
-        windowHeight / 2,
+        windowSize.x / 2,
+        windowSize.y / 2,
         0
     );
     static float angle;
@@ -54,8 +54,7 @@ void reshape(int width, int height)
 {
     printf("reshape: width:%d height:%d\n", width, height);
     glViewport(0, 0, width, height);
-    windowWidth = width;
-    windowHeight = height;
+    windowSize = { width,height };
 }
 void keyboard(unsigned char key, int x, int y)
 {
@@ -75,7 +74,7 @@ int main(int argc, char* argv[])
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE);
     glutInitWindowPosition(640, 0);
-    glutInitWindowSize(windowWidth, windowHeight);
+    glutInitWindowSize(windowSize.x, windowSize.y);
     glutCreateWindow(APP_TITLE);
     glutDisplayFunc(display);
     glutTimerFunc(0, timer, 0);
