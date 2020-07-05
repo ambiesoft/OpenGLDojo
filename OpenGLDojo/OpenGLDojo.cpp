@@ -17,9 +17,11 @@ void display()
     // glFlush();
     glutSwapBuffers();
 }
-void idle()
+void timer(int v)
 {
     glutPostRedisplay();
+
+    glutTimerFunc(1000/60, timer, 0);
 }
 int main(int argc, char* argv[])
 {
@@ -29,6 +31,6 @@ int main(int argc, char* argv[])
     glutInitWindowSize(640, 640);
     glutCreateWindow(APP_TITLE);
     glutDisplayFunc(display);
-    glutIdleFunc(idle);
+    glutTimerFunc(0, timer, 0);
     glutMainLoop();
 }
