@@ -14,7 +14,7 @@ ivec2 windowSize = { 800,600 };
 
 bool keys[256];
 Rect rect(vec2(100,100), vec2(100,100));
-
+vec2 point(windowSize.x / 2, windowSize.y / 2);
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -28,8 +28,23 @@ void display()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    rect.Draw();
+    if (rect.intersect(point))
+    {
+        glColor3ub(0xff, 0, 0);
+    }
+    else
+    {
+        glColor3ub(0, 0, 0xff);
+    }
+    rect.draw();
 
+    glColor3ub(0xff, 0xff, 0xff);
+    glPointSize(8);
+    glBegin(GL_POINTS);
+    {
+        glVertex2f(point.x, point.y);
+    }
+    glEnd();
 
     fontBegin();
     fontSetColor(0, 0xff, 0xee);
