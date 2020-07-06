@@ -5,6 +5,7 @@
 #include "../glm/glm/glm.hpp"
 #include <GL/glut.h>
 #include "font.h"
+#include "Rect.h"
 
 #define APP_TITLE "OpenGLDojo"
 
@@ -12,6 +13,7 @@ using namespace glm;
 ivec2 windowSize = { 800,600 };
 
 bool keys[256];
+Rect rect(vec2(100,100), vec2(100,100));
 
 void display()
 {
@@ -26,37 +28,29 @@ void display()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glTranslatef(
-        windowSize.x / 2,
-        windowSize.y / 2,
-        0
-    );
-    static float angle;
-    if (keys['d'])
-        angle += 1;
-    if (keys['a'])
-        angle -= 1;
-    glRotatef(
-        angle, //angle
-        0, 0, 1 // axis, z
-    );
-    glScalef(256, 256, 1);
-    glutWireTeapot(1);
-    // glFlush();
+    rect.Draw();
+
 
     fontBegin();
     fontSetColor(0, 0xff, 0xee);
     fontSetPosition(0, windowSize.y - fontGetSize()*1.5);
     fontSetSize(FONT_DEFAULT_SIZE / 2);
-    fontDraw("angle:%f", angle);
     fontEnd();
 
     glutSwapBuffers();
 }
 void timer(int v)
 {
+    float f = 2;
+    if (keys['w'])
+        rect.m_position.y -= f;
+    if (keys['s'])
+        rect.m_position.y += f;
+    if (keys['a'])
+        rect.m_position.x -= f;
+    if (keys['d'])
+        rect.m_position.x += f;
     glutPostRedisplay();
-
     glutTimerFunc(1000/60, timer, 0);
 }
 void reshape(int width, int height)
