@@ -9,7 +9,7 @@ struct Rect
 	vec2 m_size;
 
 	Rect(const vec2& position, const vec2& size);
-	void draw();
+	void Draw();
 	bool intersect(const vec2& point);
 };
 

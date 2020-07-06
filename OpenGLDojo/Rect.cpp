@@ -9,7 +9,7 @@ Rect::Rect(const vec2& position, const vec2& size) :
 
 }
 
-void Rect::draw()
+void Rect::Draw()
 {
 	glRectf(
 		m_position.x, m_position.y,
