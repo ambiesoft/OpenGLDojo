@@ -5,7 +5,6 @@
 #include "../glm/glm/glm.hpp"
 #include <GL/glut.h>
 #include "font.h"
-#include "Rect.h"
 
 #define APP_TITLE "OpenGLDojo"
 
@@ -13,8 +12,6 @@ using namespace glm;
 ivec2 windowSize = { 800,600 };
 
 bool keys[256];
-Rect rect1(vec2(100, 100), vec2(100, 200));
-Rect rect2(vec2(windowSize.x / 2, windowSize.y / 2), vec2(200, 100));
 
 void display()
 {
@@ -29,40 +26,47 @@ void display()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    if (rect1.intersect(rect2))
-    {
-        glColor3ub(0xff, 0, 0);
-    }
-    else
-    {
-        glColor3ub(0, 0, 0xff);
-    }
-    rect1.draw();
-
-    glColor3ub(0, 0xff, 0);
-    rect2.draw();
-
+    glTranslatef(
+        windowSize.x / 2,
+        windowSize.y / 2,
+        0
+    );
+    static float angle;
+    if (keys['d'])
+        angle += 1;
+    if (keys['a'])
+        angle -= 1;
+    glRotatef(
+        angle, //angle
+        0, 0, 1 // axis, z
+    );
+    glScalef(256, 256, 1);
+    glutWireTeapot(1);
+    // glFlush();
 
     fontBegin();
-    fontSetColor(0, 0xff, 0xee);
-    fontSetPosition(0, windowSize.y - fontGetSize()*1.5);
-    fontSetSize(FONT_DEFAULT_SIZE / 2);
+    {
+        fontSetColor(0, 0xff, 0xee);
+        fontSetSize(FONT_DEFAULT_SIZE);
+        float lineHeight = fontGetSize() * 1.5;
+        float y = windowSize.y - lineHeight * 2;
+
+        fontSetWeight(fontGetWeightMin());
+        fontSetPosition(0, y);
+        fontDraw("min:%f", fontGetWeightMin());
+
+        fontSetWeight(fontGetWeightMax());
+        fontSetPosition(0, y += lineHeight);
+        fontDraw("max:%f", fontGetWeightMax());
+    }
     fontEnd();
 
     glutSwapBuffers();
 }
 void timer(int v)
 {
-    float f = 2;
-    if (keys['w'])
-        rect1.m_position.y -= f;
-    if (keys['s'])
-        rect1.m_position.y += f;
-    if (keys['a'])
-        rect1.m_position.x -= f;
-    if (keys['d'])
-        rect1.m_position.x += f;
     glutPostRedisplay();
+
     glutTimerFunc(1000/60, timer, 0);
 }
 void reshape(int width, int height)
