@@ -2,7 +2,7 @@
 #include <stdarg.h>
 
 #include "../glm/glm/glm.hpp"
-#include "GL/glut.h"
+#include <GL/glut.h>
 
 #include "font.h"
 

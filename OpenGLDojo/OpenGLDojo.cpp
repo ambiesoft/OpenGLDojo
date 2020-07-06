@@ -64,7 +64,7 @@ void display()
 
     glutSwapBuffers();
 }
-void timer(int v)
+void timer(int)
 {
     for (auto&& ball : balls) {
         ball.update();
@@ -94,14 +94,14 @@ void reshape(int width, int height)
     glViewport(0, 0, width, height);
     windowSize = ivec2{ width,height };
 }
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int , int )
 {
     if (key == 0x1b)
         exit(0);
     // printf("keyboard: '%c' (%#x)\n", key, key);
     keys[key] = true;
 }
-void keyboardup(unsigned char key, int x, int y)
+void keyboardup(unsigned char key, int , int )
 {
     // printf("keyboard up: '%c' (%#x)\n", key, key);
     keys[key] = false;

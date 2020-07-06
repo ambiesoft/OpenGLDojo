@@ -1,5 +1,5 @@
 #include "Ball.h"
-#include "GL/glut.h"
+#include <GL/glut.h>
 
 void Ball::update(){
 	m_lastposition = m_position;

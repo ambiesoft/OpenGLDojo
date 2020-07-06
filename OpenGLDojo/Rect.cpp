@@ -1,6 +1,6 @@
 #include "Rect.h"
 
-#include "GL/glut.h"
+#include <GL/glut.h>
 
 Rect::Rect(const vec2& position, const vec2& size) :
 	m_position(position),
