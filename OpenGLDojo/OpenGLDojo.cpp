@@ -13,8 +13,9 @@ using namespace glm;
 ivec2 windowSize = { 800,600 };
 
 bool keys[256];
-Rect rect(vec2(100,100), vec2(100,100));
-vec2 point(windowSize.x / 2, windowSize.y / 2);
+Rect rect1(vec2(100, 100), vec2(100, 200));
+Rect rect2(vec2(windowSize.x / 2, windowSize.y / 2), vec2(200, 100));
+
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -28,7 +29,7 @@ void display()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    if (rect.intersect(point))
+    if (rect1.intersect(rect2))
     {
         glColor3ub(0xff, 0, 0);
     }
@@ -36,15 +37,11 @@ void display()
     {
         glColor3ub(0, 0, 0xff);
     }
-    rect.draw();
+    rect1.draw();
 
-    glColor3ub(0xff, 0xff, 0xff);
-    glPointSize(8);
-    glBegin(GL_POINTS);
-    {
-        glVertex2f(point.x, point.y);
-    }
-    glEnd();
+    glColor3ub(0, 0xff, 0);
+    rect2.draw();
+
 
     fontBegin();
     fontSetColor(0, 0xff, 0xee);
@@ -58,13 +55,13 @@ void timer(int v)
 {
     float f = 2;
     if (keys['w'])
-        rect.m_position.y -= f;
+        rect1.m_position.y -= f;
     if (keys['s'])
-        rect.m_position.y += f;
+        rect1.m_position.y += f;
     if (keys['a'])
-        rect.m_position.x -= f;
+        rect1.m_position.x -= f;
     if (keys['d'])
-        rect.m_position.x += f;
+        rect1.m_position.x += f;
     glutPostRedisplay();
     glutTimerFunc(1000/60, timer, 0);
 }

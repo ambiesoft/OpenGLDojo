@@ -11,5 +11,6 @@ struct Rect
 	Rect(const vec2& position, const vec2& size);
 	void draw();
 	bool intersect(const vec2& point);
+	bool intersect(const Rect& rect);
 };
 

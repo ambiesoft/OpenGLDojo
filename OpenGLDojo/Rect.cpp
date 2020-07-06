@@ -27,3 +27,12 @@ bool Rect::intersect(const vec2& point)
 		return true;
 	return false;
 }
+bool Rect::intersect(const Rect& rect)
+{
+	return (
+		((m_position.x + m_size.x) >= rect.m_position.x) &&
+		(m_position.x <= (rect.m_position.x + rect.m_size.x)) &&
+		((m_position.y + m_size.y) >= rect.m_position.y) &&
+		(m_position.y <= (rect.m_position.y + rect.m_size.y))
+		);
+}
