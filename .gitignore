@@ -4,4 +4,5 @@ Release/
 *.user
 
 /build-*-Debug/
+/build-*-Release/
 

@@ -29,6 +29,7 @@ win32 {
     win32-msvc* {
         message("win32-msvc*")
         Debug::LIBS += G:/vcpkg/packages/freeglut_x86-windows/debug/lib/freeglutd.lib
+        Release::LIBS += G:/vcpkg/packages/freeglut_x86-windows/lib/freeglut.lib
     }
 
 }

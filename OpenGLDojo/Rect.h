@@ -1,5 +1,6 @@
 #pragma once
 
+// run 'git submodule update -i'
 #include "../glm/glm/glm.hpp"
 
 using namespace glm;
