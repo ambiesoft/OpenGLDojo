@@ -30,6 +30,16 @@ win32 {
         message("win32-msvc*")
         Debug::LIBS += G:/vcpkg/packages/freeglut_x86-windows/debug/lib/freeglutd.lib
         Release::LIBS += G:/vcpkg/packages/freeglut_x86-windows/lib/freeglut.lib
+
+# not work for "add build library search path to PATH"
+#        LD_LIBRARY_PATH = G:/vcpkg/packages/freeglut_x86-windows/debug/bin
+#        DT_RPATH = G:/vcpkg/packages/freeglut_x86-windows/debug/bin
+#        RPATH = G:/vcpkg/packages/freeglut_x86-windows/debug/bin
+#        RUNPATH = G:/vcpkg/packages/freeglut_x86-windows/debug/bin
+#        LIBPATH = G:/vcpkg/packages/freeglut_x86-windows/debug/bin
+#        LIBS += G:/vcpkg/packages/freeglut_x86-windows/debug/bin
+#        INCLUDEPATH += G:/vcpkg/packages/freeglut_x86-windows/debug/bin
+
     }
 
 }
